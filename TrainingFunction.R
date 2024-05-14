@@ -7,7 +7,7 @@ trainClassificationModel <- function(x,y,ETA,NROUNDS){
   xgbcv <- xgb.cv(data = dtrain, eta=ETA,
                   nrounds = NROUNDS, nfold = 5, early_stopping_rounds = 20,print_every_n = 10,
                   objective = "binary:logistic", verbose = 2,booster="gbtree")
-  nroundPos<-xgbcv$best_iteration  #select the best iteration to train the model on the full data
+  nroundPos<-xgbcv$best_iteration  #select the best iteration to train the model on the data
   watchlist=list(train=dtrain)
   mdl <- xgb.train(data = dtrain,
                    nround = nroundPos,  subsample=0.5,watchlist = watchlist, eta=ETA, print_every_n = 10,
